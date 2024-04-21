@@ -1,9 +1,9 @@
 import { EuroCircleOutlined, ProductOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons"
-import { Card, Space, Statistic, Table, Typography } from "antd"
-import SellsChart from "./SellsChart"
-import RecentProducts from "./RecentProducts"
-import RecentOrders from "./RecentOrders"
-import ProductsChart from "./ProductsChart"
+import { Card, Space, Statistic, Typography } from "antd"
+import SellsChart from "../components/SellsChart"
+import RecentProducts from "../components/RecentProducts"
+import RecentOrders from "../components/RecentOrders"
+import ProductsChart from "../components/ProductsChart"
 const Home = () => {
   return (
     <Space className="flex px-12 py-6 w-screen max-w-6xl" size={24} direction="vertical">

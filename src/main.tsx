@@ -6,12 +6,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Dashboard from './pages/Dashboard.tsx';
+import Dashboard from './layout/Dashboard.tsx';
 import { ProtectedRoute } from './components/ProtectedRoute.tsx';
-import User from './components/User.tsx';
-import Products from './components/Products.tsx';
-import Invoices from './components/Invoices.tsx';
-import Home from './components/Home.tsx';
+import User from './pages/User.tsx';
+import Products from './pages/Products.tsx';
+import Invoices from './pages/Invoices.tsx';
+import Home from './pages/Home.tsx';
 
 const router = createBrowserRouter([
   {
