@@ -4,9 +4,10 @@ import SellsChart from "../components/SellsChart"
 import RecentProducts from "../components/RecentProducts"
 import RecentOrders from "../components/RecentOrders"
 import ProductsChart from "../components/ProductsChart"
+
 const Home = () => {
   return (
-    <Space className="flex px-12 py-6 w-screen max-w-6xl" size={24} direction="vertical">
+    <Space className="flex px-12 py-6 w-full" size={24} direction="vertical">
       <Typography.Title level={3}>Dashboard</Typography.Title>
       <Space className="flex flex-wrap justify-between" direction="horizontal">
         <Card>
@@ -65,7 +66,7 @@ const Home = () => {
 
         </Card>      
       </Space>
-      <Space className="flex flex-wrap items-start justify-between" size={30} direction="horizontal">
+      <Space className="flex flex-wrap items-start justify-evenly" size={30} direction="horizontal">
         <Space direction="vertical">
           <Typography.Title level={4}>Últimos pedidos</Typography.Title>
           <RecentOrders />
