@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react"
 import { LoginProps } from "../types/types"
 import { Navigate } from "react-router-dom";
+import React from "react";
 
 export const ProtectedRoute = ( props: PropsWithChildren<LoginProps>) => {
   const isAuthorized = async (): Promise<boolean> => {

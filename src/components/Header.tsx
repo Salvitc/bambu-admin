@@ -1,6 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons"
 import { Image, Input, Popover, Typography } from "antd"
 import logo from "../assets/bambu-logo.png"
+import React from "react"
 const Header = () => {
   const content = (
     <div className="flex flex-col gap-2 bg-green-50">

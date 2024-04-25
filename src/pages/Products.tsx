@@ -4,23 +4,19 @@ import { getProducts, postProduct } from "../API";
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { DataType, FormProps } from "../types/types";
+import React from "react";
 
 const columns: TableProps<DataType>["columns"] = [
   {
     title: 'Nombre',
-    dataIndex: 'title',
-    key: 'title',
+    dataIndex: 'name',
+    key: 'name',
     render: (text) => <a>{text}</a>,
   },
   {
     title: 'Precio',
     dataIndex: 'price',
     key: 'price',
-  },
-  {
-    title: 'Stock',
-    dataIndex: 'stock',
-    key: 'stock',
   },
   {
     title: 'Categoría',
@@ -106,7 +102,7 @@ const Products = () => {
   useEffect(() => {
     setLoadingProducts(true)
     getProducts().then((data) => {
-      setProducts(data.products)
+      setProducts(data)
       setLoadingProducts(false)
     })
   }, [])

@@ -1,12 +1,14 @@
 import { FormProps } from "../types/types"
 
 export const getOrders = async () => {
-  const response = await fetch("https://dummyjson.com/carts/1")
+  const response = await fetch("/api/order")
     return await response.json()
 }
 
+
+// PRODUCTOS
 export const getProducts = async () => {
-  const response = await fetch("https://dummyjson.com/products")
+  const response = await fetch("/api/product")
     return await response.json()
 }
 
@@ -17,6 +19,13 @@ export const postProduct = async (values: FormProps) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(values)
+  })
+    return response
+}
+
+export const deleteProduct = async (id: string) => {
+  const response = await fetch(`/api/product/${id}`, {
+    method: "DELETE"
   })
     return response
 }

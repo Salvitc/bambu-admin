@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../API"
 import { Table } from "antd"
-
+import React from "react"
 const RecentProducts = () => {
   const [products, setProducts] = useState([])
   const [loadingProducts, setLoadingProducts] = useState(true)

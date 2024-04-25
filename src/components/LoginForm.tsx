@@ -1,6 +1,7 @@
 import { FormEvent } from 'react'
 import logo from "../assets/bambu-logo.png"
 import { useNavigate } from 'react-router-dom'
+import React from 'react'
 
 interface Props{
   setUnauthorized: React.Dispatch<React.SetStateAction<boolean>>

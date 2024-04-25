@@ -1,5 +1,6 @@
 import { DonutChart, Legend } from "@tremor/react";
 import { Typography } from "antd";
+import React from "react";
 
 const ProductsChart = () => {
   return (

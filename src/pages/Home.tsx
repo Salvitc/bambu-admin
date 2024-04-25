@@ -4,6 +4,7 @@ import SellsChart from "../components/SellsChart"
 import RecentProducts from "../components/RecentProducts"
 import RecentOrders from "../components/RecentOrders"
 import ProductsChart from "../components/ProductsChart"
+import React from "react"
 
 const Home = () => {
   return (

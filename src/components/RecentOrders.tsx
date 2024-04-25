@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getOrders } from "../API"
 import { Table } from "antd"
+import React from "react"
 const RecentOrders = () => {
     const [orders, setOrders] = useState([])
     const [loadingOrders, setLoadingOrders] = useState(true)
