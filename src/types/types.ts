@@ -3,6 +3,7 @@ export interface LoginProps {
 }
 
 export interface DataType {
+  _id: string;
   key: string;
   name: string;
   price: number;
@@ -20,5 +21,14 @@ export interface FormProps {
   image?: string[];
 }
 
-
+export interface iProduct {
+  _id: string;
+  name: string;
+  description: string;
+  category: string;
+  price: number;
+  in_stock: boolean;
+  amount: number;
+  image?: string[];
+}
 

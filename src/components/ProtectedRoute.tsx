@@ -19,8 +19,9 @@ export const ProtectedRoute = ( props: PropsWithChildren<LoginProps>) => {
   
   isAuthorized()
     .then((result) => {
-      if(!result)
+      if(!result) {
         return <Navigate to="/error" replace />
+      }
     })
     .catch(() => {
       return <Navigate to="/error" replace />

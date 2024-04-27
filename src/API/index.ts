@@ -29,3 +29,14 @@ export const deleteProduct = async (id: string) => {
   })
     return response
 }
+
+export const updateProduct = async (values: FormProps, id: string) => {
+  const response = await fetch(`/api/product/${id}`, {
+    method: "PUT",
+    headers:{
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(values)
+  })
+    return response
+}
