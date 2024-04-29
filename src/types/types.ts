@@ -2,16 +2,7 @@ export interface LoginProps {
   roleRequired: string
 }
 
-export interface DataType {
-  _id: string;
-  key: string;
-  name: string;
-  price: number;
-  stock: number;
-  category: string;
-}
-
-export interface FormProps {
+export interface ProductFormProps{
   name: string;
   description: string;
   category: string;
@@ -19,6 +10,15 @@ export interface FormProps {
   in_stock: boolean;
   amount: number;
   image?: string[];
+}
+
+export interface UserFormProps{
+  name: string;
+  lastname: string;
+  username: string;
+  email: string;
+  role: string;
+  address: string;
 }
 
 export interface iProduct {
@@ -32,3 +32,14 @@ export interface iProduct {
   image?: string[];
 }
 
+export interface iUser {
+  _id: string;
+  name: string;
+  lastname: string;
+  username: string;
+  email: string;
+  role: {
+    code: string;
+  }
+  address: string;
+}

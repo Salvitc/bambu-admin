@@ -3,9 +3,8 @@ import { TableProps } from "antd"
 import { deleteProduct, getProducts, postProduct, updateProduct } from "../API";
 import { useEffect, useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
-import { DataType, FormProps, iProduct} from "../types/types";
+import { ProductFormProps, iProduct} from "../types/types";
 import React from "react";
-
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -15,9 +14,8 @@ const Products = () => {
   const [stockEnabled, setStockEnabled] = useState(false)
   const [modal, contextHolder] = Modal.useModal()
   const [refresh, setRefresh] = useState(false)
-  const [openEdit, setOpenEdit] = useState(false)
 
-  const columns: TableProps<DataType>["columns"] = [
+  const columns: TableProps<iProduct>["columns"] = [
     {
       title: 'ID',
       dataIndex: '_id',
@@ -28,7 +26,6 @@ const Products = () => {
       title: 'Nombre',
       dataIndex: 'name',
       key: 'name',
-      render: (text: string) => <a>{text}</a>,
     },
     {
       title: 'Precio',
@@ -39,6 +36,7 @@ const Products = () => {
       title: 'Stock',
       dataIndex: 'amount',
       key: 'amount',
+      render: (text: string) => <p>{text} €</p>,
     },
     {
       title: 'Categoría',
@@ -75,7 +73,6 @@ const Products = () => {
   }
 
   const handleEdit = (product: iProduct) => {
-    setOpenEdit(true)
     modal.confirm({
       title: 'Editar producto',
       okText: 'Editar',
@@ -91,7 +88,7 @@ const Products = () => {
           wrapperCol={{span: 16}}
           layout="horizontal"
           style={{maxWidth: 1200}}
-          onFinish={(values: FormProps) => {
+          onFinish={(values: ProductFormProps) => {
             updateProduct(values, product._id)
               .then((response) => {
                 if (response.ok) {
@@ -202,7 +199,7 @@ const Products = () => {
     })
   }
 
-  const handleOk = (values: FormProps) => {
+  const handleOk = (values: ProductFormProps) => {
     setLoading(true)
     postProduct(values)
       .then((response) => {
@@ -239,10 +236,6 @@ const Products = () => {
 
   const handleCancel = () => {
     setOpen(false)
-  }
-
-  const handleEditCancel = () => {
-    setOpenEdit(false)
   }
 
   useEffect(() => {
@@ -282,7 +275,7 @@ const Products = () => {
           wrapperCol={{span: 16}}
           layout="horizontal"
           style={{maxWidth: 1200}}
-          onFinish={(values: FormProps) => {
+          onFinish={(values: ProductFormProps) => {
             handleOk(values)
           }}
           initialValues={{
