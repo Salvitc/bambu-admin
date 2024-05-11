@@ -43,3 +43,13 @@ export interface iUser {
   }
   address: string;
 }
+
+export interface iInvoice {
+  _id: string;
+  order_id: string;
+  date: Date;
+  user: iUser;
+  products: iProduct[];
+  total: number;
+}
+

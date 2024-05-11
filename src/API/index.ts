@@ -1,7 +1,13 @@
 import { ProductFormProps, UserFormProps, iUser } from "../types/types"
 
+//PEDIDOS
 export const getOrders = async () => {
   const response = await fetch("/api/order")
+    return await response.json()
+}
+
+export const getOrdersByDateRange = async (dates: string[]) => {
+  const response = await fetch(`/api/order/dates/${dates[0]}/${dates[1]}`)
     return await response.json()
 }
 

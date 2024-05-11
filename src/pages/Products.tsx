@@ -31,12 +31,12 @@ const Products = () => {
       title: 'Precio',
       dataIndex: 'price',
       key: 'price',
+      render: (text: string) => <Tag color="green">{text} €</Tag>,
     },
     {
       title: 'Stock',
       dataIndex: 'amount',
       key: 'amount',
-      render: (text: string) => <p>{text} €</p>,
     },
     {
       title: 'Categoría',

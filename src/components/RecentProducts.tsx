@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../API"
-import { Table } from "antd"
+import { Table, Tag } from "antd"
 import React from "react"
 const RecentProducts = () => {
   const [products, setProducts] = useState([])
@@ -8,17 +8,29 @@ const RecentProducts = () => {
   useEffect(() => {
     setLoadingProducts(true)
     getProducts().then((data) => {
-      setProducts(data.products)
+      setProducts(data)
       setLoadingProducts(false)
     })
   }, [])
   return (
     <Table
       columns={[
-        { title: "Producto", dataIndex: "title"},
-        { title: "Precio", dataIndex: "price"},
-        { title: "Stock", dataIndex: "stock"},
-        { title: "Categoria", dataIndex: "category"},
+        { title: "Producto", dataIndex: "name"},
+        { title: "Precio", dataIndex: "price", 
+          render: (price: number) => (
+            <Tag color="green">
+              {price} €
+            </Tag>
+          ),
+        },
+        { title: "Stock", dataIndex: "amount"},
+        { title: "Categoria", dataIndex: "category",
+          render: (category: string) => (
+            <Tag color="orange">
+              {category}
+            </Tag>
+          ),
+        },
       ]}
       dataSource={products}
       loading={loadingProducts}

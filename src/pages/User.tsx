@@ -242,25 +242,25 @@ const User = () => {
   }, [refresh])
 
   return (
-    <Space direction="vertical" className="flex flex-wrap justify-between px-12 py-6 w-full">
-      <Space direction="vertical">
+    <Space direction="vertical" className="px-12 py-6 w-full">
+      <Space direction="vertical" className="mb-14">
         <Typography.Title level={3}>Clientes</Typography.Title>
         <Table 
           columns={columns}
           dataSource={users.filter(user => user.role.code === 'CUSTOMER')}
           loading={loadingUsers}
-          style={{width: '650px'}}/>
+        />
       </Space>
       <Space direction="vertical">
-        <Space direction="horizontal" className="flex flex-wrap justify-between">
+        <Space direction="horizontal" className="flex justify-between">
           <Typography.Title level={3}>Administradores</Typography.Title>
           <Button className="text-green-700 bg-green-50 rounded-lg border border-green-200" onClick={handleCreateAdmin}>Crear admin</Button>
         </Space>
         <Table
           columns={columns}
           dataSource={users.filter(user => user.role.code=== 'ADMIN')}
-          loading={loadingUsers}
-          style={{width: '650px'}}/>
+          loading={loadingUsers} 
+        />
       </Space>
       {contextHolder}
     </Space>
