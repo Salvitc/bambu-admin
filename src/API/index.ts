@@ -18,12 +18,23 @@ export const getUsers = async () => {
 }
 
 export const postUser = async (values: UserFormProps) => {
+  const user: iUser = {
+      lastname: values.lastname,
+      username: values.username,
+      email: values.email,
+      password: values.password!,
+      role: {
+          code: 'ADMIN'
+      },
+      address: values.address,
+      name: values.name
+  }
   const response = await fetch("/api/user", {
     method: "POST",
     headers:{
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(values)
+    body: JSON.stringify(user)
   })
     return response
 }

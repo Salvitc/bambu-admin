@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Space, Table, TableProps, Typography } from "antd"
 import React, { useEffect } from "react"
 import { UserFormProps, iUser } from "../types/types"
-import { deleteUser, getUsers, updateUser } from "../API"
+import { deleteUser, getUsers, postUser, updateUser } from "../API"
 
 const User = () => {
   const [users, setUsers] = React.useState<iUser[]>([])
@@ -41,7 +41,7 @@ const User = () => {
       render: (_: any, user: iUser) => (
         <Space size="middle">
           <Button onClick={() => handleEdit(user)}className="text-blue-700 bg-blue-50 rounded-lg border border-blue-200">Editar</Button>
-          <Button onClick={() => handleDelete(user._id)} className="text-red-700 bg-red-50 rounded-lg border border-red-200">Eliminar</Button>
+          <Button onClick={() => handleDelete(user._id!)} className="text-red-700 bg-red-50 rounded-lg border border-red-200">Eliminar</Button>
         </Space>
       ),
     },
@@ -64,7 +64,7 @@ const User = () => {
           layout="horizontal"
           style={{maxWidth: 1200}}
           onFinish={(values: UserFormProps) => {
-            updateUser(values, user._id)
+            updateUser(values, user._id!)
               .then((response: any) => {
                 if (response.ok) {
                   modal.success({
@@ -178,7 +178,8 @@ const User = () => {
           layout="horizontal"
           style={{maxWidth: 1200}}
           onFinish={(values: UserFormProps) => {
-            updateUser(values, '')
+            console.log(values)
+            postUser(values)
               .then((response: any) => {
                 if (response.ok) {
                   modal.success({

@@ -19,6 +19,7 @@ export interface UserFormProps{
   email: string;
   role: string;
   address: string;
+  password?: string;
 }
 
 export interface iProduct {
@@ -33,11 +34,12 @@ export interface iProduct {
 }
 
 export interface iUser {
-  _id: string;
+  _id?: string;
   name: string;
   lastname: string;
   username: string;
   email: string;
+  password?: string;
   role: {
     code: string;
   }

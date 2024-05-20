@@ -68,16 +68,8 @@ const Home = () => {
         </Card>      
       </Space>
       <Space className="flex flex-wrap items-start justify-between mt-20" size={30} direction="horizontal">
-        <Space direction="vertical">
-          <Typography.Title level={4}>Últimos pedidos</Typography.Title>
-          <RecentOrders />
-        </Space>
         <Space style={{width: "500px"}} direction="vertical">
           <SellsChart />
-        </Space>
-        <Space direction="vertical">
-          <Typography.Title level={4}>Productos recientes</Typography.Title>
-          <RecentProducts />
         </Space>
         <Space style={{width: "500px"}} direction="vertical">
           <ProductsChart />
