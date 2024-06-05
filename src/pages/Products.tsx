@@ -2,11 +2,14 @@ import { Button, Checkbox, Form, Input, InputNumber, Modal, Space, Table, Tag, T
 import { TableProps } from "antd"
 import { deleteProduct, getProducts, postProduct, updateProduct } from "../API";
 import { useEffect, useState } from "react";
-import { PlusOutlined } from "@ant-design/icons";
-import { ProductFormProps, iProduct} from "../types/types";
+import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { ProductFormProps, iProduct } from "../types/types";
+import { UploadProps } from 'antd';
 import React from "react";
 
 const Products = () => {
+  const [fileList, setFileList] = useState<string[]>([])
+
   const [products, setProducts] = useState([])
   const [loadingProducts, setLoadingProducts] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -14,6 +17,22 @@ const Products = () => {
   const [stockEnabled, setStockEnabled] = useState(false)
   const [modal, contextHolder] = Modal.useModal()
   const [refresh, setRefresh] = useState(false)
+
+  const props: UploadProps = {
+    name: 'image',
+    action: 'https://api.imgbb.com/1/upload?key=7fca0f0a6defbe987d23067a9e7b37e1',
+    method: 'POST',
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        fileList.push(info.file.response.data.display_url)
+      } else if (info.file.status === 'error') {
+        console.log(`${info.file.name} file upload failed.`);
+      }
+    }
+  }
 
   const columns: TableProps<iProduct>["columns"] = [
     {
@@ -53,7 +72,7 @@ const Products = () => {
       key: 'actions',
       render: (_: any, product: iProduct) => (
         <Space size="middle">
-          <Button onClick={() => handleEdit(product)}className="text-blue-700 bg-blue-50 rounded-lg border border-blue-200">Editar</Button>
+          <Button onClick={() => handleEdit(product)} className="text-blue-700 bg-blue-50 rounded-lg border border-blue-200">Editar</Button>
           <Button onClick={() => handleDelete(product._id)} className="text-red-700 bg-red-50 rounded-lg border border-red-200">Eliminar</Button>
         </Space>
       ),
@@ -66,7 +85,6 @@ const Products = () => {
     }
     return e && e.fileList
   }
-
 
   const showModal = () => {
     setOpen(true)
@@ -84,11 +102,12 @@ const Products = () => {
       content: (
         <Form
           id="update_product"
-          labelCol={{span: 6}}
-          wrapperCol={{span: 16}}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
           layout="horizontal"
-          style={{maxWidth: 1200}}
+          style={{ maxWidth: 1200 }}
           onFinish={(values: ProductFormProps) => {
+            values.images = fileList;
             updateProduct(values, product._id)
               .then((response) => {
                 if (response.ok) {
@@ -117,6 +136,9 @@ const Products = () => {
                   )
                 })
               })
+              .finally(() => {
+                setFileList([]);
+              })
           }}
           initialValues={{
             name: product.name,
@@ -127,36 +149,34 @@ const Products = () => {
             amount: product.amount
           }}
         >
-          <Form.Item label="Nombre" name="name" rules={[{required: true, message: 'Introduce un nombre.'}]}>
-            <Input className="rounded-lg" defaultValue={product.name}/>
+          <Form.Item label="Nombre" name="name" rules={[{ required: true, message: 'Introduce un nombre.' }]}>
+            <Input className="rounded-lg" defaultValue={product.name} />
           </Form.Item>
-          <Form.Item label="Descripción" name="description" rules={[{required: true, message: 'Introduce una descripción'}]}>
-            <Input.TextArea className="rounded-lg" defaultValue={product.description}/>
+          <Form.Item label="Descripción" name="description" rules={[{ required: true, message: 'Introduce una descripción' }]}>
+            <Input.TextArea className="rounded-lg" defaultValue={product.description} />
           </Form.Item>
-          <Form.Item label="Categoría" name="category" rules={[{required: true, message: 'Selecciona una categoría'}]}>
-            <Input className="rounded-lg" defaultValue={product.category}/>
+          <Form.Item label="Categoría" name="category" rules={[{ required: true, message: 'Selecciona una categoría' }]}>
+            <Input className="rounded-lg" defaultValue={product.category} />
           </Form.Item>
-          <Form.Item label="Precio" name="price" rules={[{required: true, message: 'Introduce un precio'}]}>
-            <InputNumber className="rounded-lg" defaultValue={product.price}/>
+          <Form.Item label="Precio" name="price" rules={[{ required: true, message: 'Introduce un precio' }]}>
+            <InputNumber className="rounded-lg" defaultValue={product.price} />
           </Form.Item>
-          <Form.Item label="En Stock" name="in_stock" valuePropName="checked" rules={[{required: true}]}>
+          <Form.Item label="En Stock" name="in_stock" valuePropName="checked" rules={[{ required: true }]}>
             <Checkbox
               defaultChecked={product.in_stock}
             />
           </Form.Item>
-          <Form.Item label="Cantidad" name="amount" id="amount" rules={[{required: true}]}>
-            <InputNumber 
+          <Form.Item label="Cantidad" name="amount" id="amount" rules={[{ required: true }]}>
+            <InputNumber
               defaultValue={product.amount}
             />
           </Form.Item>
           <Form.Item label="Imagenes" name="image" valuePropName="imageList" getValueFromEvent={normFile}>
-            <Upload action="/upload.do" listType="picture-card">
-              <Button style={{ border: 0, background: "none"}}>
-                <PlusOutlined />
-              </Button>
-            </Upload>              
+            <Upload {...props} >
+              <Button icon={<UploadOutlined />}>Añadir imagen</Button>
+            </Upload>
           </Form.Item>
-        </Form>
+        </Form >
       )
     })
   }
@@ -195,12 +215,13 @@ const Products = () => {
               )
             })
           })
-        }
+      }
     })
   }
 
   const handleOk = (values: ProductFormProps) => {
     setLoading(true)
+    values.images = fileList
     postProduct(values)
       .then((response) => {
         setLoading(false)
@@ -224,13 +245,16 @@ const Products = () => {
       .catch((error) => {
         setLoading(false)
         modal.error({
-            content: (
-              <>
-                <h1>Error al añadir el producto</h1>
-                <p>{error}</p>
-              </>
-            )
-          })
+          content: (
+            <>
+              <h1>Error al añadir el producto</h1>
+              <p>{error}</p>
+            </>
+          )
+        })
+      })
+      .finally(() => {
+        setFileList([]);
       })
   }
 
@@ -269,12 +293,12 @@ const Products = () => {
           </Button>
         ]}
       >
-       <Form
+        <Form
           id="create_product"
-          labelCol={{span: 6}}
-          wrapperCol={{span: 16}}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
           layout="horizontal"
-          style={{maxWidth: 1200}}
+          style={{ maxWidth: 1200 }}
           onFinish={(values: ProductFormProps) => {
             handleOk(values)
           }}
@@ -283,38 +307,36 @@ const Products = () => {
             amount: 0
           }}
         >
-          <Form.Item label="Nombre" name="name" rules={[{required: true, message: 'Introduce un nombre.'}]}>
+          <Form.Item label="Nombre" name="name" rules={[{ required: true, message: 'Introduce un nombre.' }]}>
             <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Descripción" name="description" rules={[{required: true, message: 'Introduce una descripción'}]}>
-            <Input.TextArea className="rounded-lg"/>
+          <Form.Item label="Descripción" name="description" rules={[{ required: true, message: 'Introduce una descripción' }]}>
+            <Input.TextArea className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Categoría" name="category" rules={[{required: true, message: 'Selecciona una categoría'}]}>
+          <Form.Item label="Categoría" name="category" rules={[{ required: true, message: 'Selecciona una categoría' }]}>
             <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Precio" name="price" rules={[{required: true, message: 'Introduce un precio'}]}>
-            <InputNumber className="rounded-lg"/>
+          <Form.Item label="Precio" name="price" rules={[{ required: true, message: 'Introduce un precio' }]}>
+            <InputNumber className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="En Stock" name="in_stock" valuePropName="checked" rules={[{required: true}]}>
+          <Form.Item label="En Stock" name="in_stock" valuePropName="checked" rules={[{ required: true }]}>
             <Checkbox
               onChange={(e) => {
-                  setStockEnabled(e.target.checked) 
-                }}
+                setStockEnabled(e.target.checked)
+              }}
             />
           </Form.Item>
-          <Form.Item label="Cantidad" name="amount" id="amount" rules={[{required: true}]}>
-            <InputNumber 
+          <Form.Item label="Cantidad" name="amount" id="amount" rules={[{ required: true }]}>
+            <InputNumber
               disabled={!stockEnabled}
             />
           </Form.Item>
           <Form.Item label="Imagenes" name="image" valuePropName="imageList" getValueFromEvent={normFile}>
-            <Upload action="/upload.do" listType="picture-card">
-              <Button style={{ border: 0, background: "none"}}>
-                <PlusOutlined />
-              </Button>
-            </Upload>              
+            <Upload {...props} >
+              <Button icon={<UploadOutlined />}>Añadir imagen</Button>
+            </Upload>
           </Form.Item>
-       </Form>
+        </Form>
       </Modal>
       {contextHolder}
     </Space>

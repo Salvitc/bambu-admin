@@ -2,17 +2,17 @@ export interface LoginProps {
   roleRequired: string
 }
 
-export interface ProductFormProps{
+export interface ProductFormProps {
   name: string;
   description: string;
   category: string;
   price: number;
   in_stock: boolean;
   amount: number;
-  image?: string[];
+  images?: string[];
 }
 
-export interface UserFormProps{
+export interface UserFormProps {
   name: string;
   lastname: string;
   username: string;
