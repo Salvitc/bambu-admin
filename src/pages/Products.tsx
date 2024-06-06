@@ -107,7 +107,8 @@ const Products = () => {
           layout="horizontal"
           style={{ maxWidth: 1200 }}
           onFinish={(values: ProductFormProps) => {
-            values.images = fileList;
+            if (fileList.length !== 0)
+              values.images = fileList;
             updateProduct(values, product._id)
               .then((response) => {
                 if (response.ok) {
@@ -137,7 +138,7 @@ const Products = () => {
                 })
               })
               .finally(() => {
-                setFileList([]);
+                setFileList(new Array<string>())
               })
           }}
           initialValues={{
@@ -221,7 +222,8 @@ const Products = () => {
 
   const handleOk = (values: ProductFormProps) => {
     setLoading(true)
-    values.images = fileList
+    if (fileList.length !== 0)
+      values.images = fileList
     postProduct(values)
       .then((response) => {
         setLoading(false)
@@ -254,7 +256,7 @@ const Products = () => {
         })
       })
       .finally(() => {
-        setFileList([]);
+        setFileList(new Array<string>())
       })
   }
 
