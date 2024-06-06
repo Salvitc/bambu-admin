@@ -1,10 +1,7 @@
 import { EuroCircleOutlined, ProductOutlined, ShoppingCartOutlined, UserOutlined } from "@ant-design/icons"
 import { Card, Space, Statistic, Typography } from "antd"
 import SellsChart from "../components/SellsChart"
-import RecentProducts from "../components/RecentProducts"
-import RecentOrders from "../components/RecentOrders"
 import ProductsChart from "../components/ProductsChart"
-import React from "react"
 
 const Home = () => {
   return (
@@ -22,7 +19,7 @@ const Home = () => {
                 padding: 12
               }}
             />
-            <Statistic className="flex flex-col items-center" title="Productos" value={Math.floor(Math.random() * 100)}/>
+            <Statistic className="flex flex-col items-center" title="Productos" value={Math.floor(Math.random() * 100)} />
           </Space>
         </Card>
         <Card>
@@ -36,42 +33,42 @@ const Home = () => {
                 padding: 12
               }}
             />
-            <Statistic className="flex flex-col items-center" title="Ventas" value={Math.floor(Math.random() * 100)}/>
+            <Statistic className="flex flex-col items-center" title="Ventas" value={Math.floor(Math.random() * 100)} />
           </Space>
         </Card>
         <Card>
           <Space direction="horizontal">
-            <UserOutlined style={{ 
-                fontSize: 25,
-                color: "purple",
-                backgroundColor: "rgba(255, 0, 255, 0.25)",
-                borderRadius: "50%",
-                padding: 12
-              }}
+            <UserOutlined style={{
+              fontSize: 25,
+              color: "purple",
+              backgroundColor: "rgba(255, 0, 255, 0.25)",
+              borderRadius: "50%",
+              padding: 12
+            }}
             />
-            <Statistic className="flex flex-col items-center" title="Clientes" value={Math.floor(Math.random() * 100)}/>
+            <Statistic className="flex flex-col items-center" title="Clientes" value={Math.floor(Math.random() * 100)} />
           </Space>
         </Card>
         <Card>
           <Space direction="horizontal">
             <EuroCircleOutlined style={{
-                fontSize: 25,
-                color: "green",
-                backgroundColor: "rgba(0, 255, 0, 0.25)",
-                borderRadius: "50%",
-                padding: 12
-              }}
+              fontSize: 25,
+              color: "green",
+              backgroundColor: "rgba(0, 255, 0, 0.25)",
+              borderRadius: "50%",
+              padding: 12
+            }}
             />
-            <Statistic className="flex flex-col items-center" title="Beneficios" value={Math.floor(Math.random() * 100)}/>
+            <Statistic className="flex flex-col items-center" title="Beneficios" value={Math.floor(Math.random() * 100)} />
           </Space>
 
-        </Card>      
+        </Card>
       </Space>
       <Space className="flex flex-wrap items-start justify-between mt-20" size={30} direction="horizontal">
-        <Space style={{width: "500px"}} direction="vertical">
+        <Space style={{ width: "500px" }} direction="vertical">
           <SellsChart />
         </Space>
-        <Space style={{width: "500px"}} direction="vertical">
+        <Space style={{ width: "500px" }} direction="vertical">
           <ProductsChart />
         </Space>
       </Space>

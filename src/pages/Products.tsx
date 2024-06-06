@@ -2,10 +2,9 @@ import { Button, Checkbox, Form, Input, InputNumber, Modal, Space, Table, Tag, T
 import { TableProps } from "antd"
 import { deleteProduct, getProducts, postProduct, updateProduct } from "../API";
 import { useEffect, useState } from "react";
-import { PlusOutlined, UploadOutlined } from "@ant-design/icons";
+import { UploadOutlined } from "@ant-design/icons";
 import { ProductFormProps, iProduct } from "../types/types";
 import { UploadProps } from 'antd';
-import React from "react";
 
 const Products = () => {
   const [fileList, setFileList] = useState<string[]>([])

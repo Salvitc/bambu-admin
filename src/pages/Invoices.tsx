@@ -1,10 +1,9 @@
-import { Button, Modal, Space, Table, TableProps, Typography, DatePicker, Form} from "antd"
+import { Button, Modal, Space, Table, TableProps, Typography, DatePicker, Form } from "antd"
 import React, { useEffect } from "react"
 import { iInvoice } from "../types/types"
 import { getOrders, getOrdersByDateRange } from "../API"
 import { PDFDownloadLink } from "@react-pdf/renderer"
 import InvoicePdf from "../components/InvoicePdf"
-import Excel from "exceljs"
 
 interface DatesProps {
   dates: Date[]
@@ -48,7 +47,7 @@ const Invoices = () => {
       key: 'products',
       render: (_: any, invoice: iInvoice) => (
         <Space>
-          <Typography.Text>{invoice.products.reduce((sum, current) => { return sum + current.amount}, 0)}</Typography.Text>
+          <Typography.Text>{invoice.products.reduce((sum, current) => { return sum + current.amount }, 0)}</Typography.Text>
         </Space>
       )
     },
@@ -88,31 +87,31 @@ const Invoices = () => {
           </Space>
           <Space direction="vertical" className="w-full">
             <Typography.Text>Productos:</Typography.Text>
-              <Table
-                dataSource={invoice.products}
-                columns={[
-                  {
-                    title: 'Nombre',
-                    dataIndex: 'name',
-                    key: 'name'
-                  },
-                  {
-                    title: 'Cantidad',
-                    dataIndex: 'amount',
-                    key: 'amount'
-                  },
-                  {
-                    title: 'Precio',
-                    dataIndex: 'price',
-                    key: 'price'
-                  }
-                ]}
-              />
+            <Table
+              dataSource={invoice.products}
+              columns={[
+                {
+                  title: 'Nombre',
+                  dataIndex: 'name',
+                  key: 'name'
+                },
+                {
+                  title: 'Cantidad',
+                  dataIndex: 'amount',
+                  key: 'amount'
+                },
+                {
+                  title: 'Precio',
+                  dataIndex: 'price',
+                  key: 'price'
+                }
+              ]}
+            />
           </Space>
         </Space>
       )
     })
-  
+
   }
 
   const handleExport = (invoice: iInvoice) => () => {
@@ -138,7 +137,7 @@ const Invoices = () => {
 
   const handleExportByDate = () => () => {
     const { RangePicker } = DatePicker
-      modal.confirm({
+    modal.confirm({
       title: 'Exportar facturas por fecha',
       okText: 'Exportar',
       cancelText: 'Cancelar',
@@ -154,8 +153,8 @@ const Invoices = () => {
                 })
             }}
           >
-            <Form.Item name="dates" rules={[{required: true, message: "Debe introducir un rango de fechas."}]}>
-              <RangePicker/>
+            <Form.Item name="dates" rules={[{ required: true, message: "Debe introducir un rango de fechas." }]}>
+              <RangePicker />
             </Form.Item>
           </Form>
         </Space>
@@ -178,7 +177,7 @@ const Invoices = () => {
       setLoadingInvoices(false)
     })
 
-  }, []) 
+  }, [])
 
   return (
     <Space direction="vertical" className="px-12 py-6 w-full">

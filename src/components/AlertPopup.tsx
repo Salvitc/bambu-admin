@@ -1,5 +1,3 @@
-import React from "react"
-
 interface AlertProps {
   text: string
 }
@@ -7,12 +5,12 @@ interface AlertProps {
 const AlertPopup = ({ text }: AlertProps) => {
   return (
     <div
-        className="font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
-        data-dismissible="alert">
+      className="font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
+      data-dismissible="alert">
       <div className="mr-12">{text}</div>
       <div
-          className="absolute top-2.5 right-3 w-max rounded-lg transition-all hover:bg-white hover:bg-opacity-20"
-          data-dismissible-target="alert">
+        className="absolute top-2.5 right-3 w-max rounded-lg transition-all hover:bg-white hover:bg-opacity-20"
+        data-dismissible-target="alert">
         <button
           role="button"
           className="w-max rounded-lg p-1"

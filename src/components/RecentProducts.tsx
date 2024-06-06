@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../API"
 import { Table, Tag } from "antd"
-import React from "react"
 const RecentProducts = () => {
   const [products, setProducts] = useState([])
   const [loadingProducts, setLoadingProducts] = useState(true)
@@ -15,16 +14,18 @@ const RecentProducts = () => {
   return (
     <Table
       columns={[
-        { title: "Producto", dataIndex: "name"},
-        { title: "Precio", dataIndex: "price", 
+        { title: "Producto", dataIndex: "name" },
+        {
+          title: "Precio", dataIndex: "price",
           render: (price: number) => (
             <Tag color="green">
               {price} €
             </Tag>
           ),
         },
-        { title: "Stock", dataIndex: "amount"},
-        { title: "Categoria", dataIndex: "category",
+        { title: "Stock", dataIndex: "amount" },
+        {
+          title: "Categoria", dataIndex: "category",
           render: (category: string) => (
             <Tag color="orange">
               {category}

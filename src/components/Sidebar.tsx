@@ -1,7 +1,6 @@
 import { EuroCircleOutlined, HomeOutlined, ProductOutlined, UserOutlined } from "@ant-design/icons"
 import { Menu, Space } from "antd"
 import { useNavigate } from "react-router-dom";
-import React from "react"
 const Sidebar = () => {
   const navigate = useNavigate();
   return (
@@ -10,10 +9,10 @@ const Sidebar = () => {
         defaultSelectedKeys={["/dashboard"]}
         onClick={({ key }) => navigate(key)}
         items={[
-          { icon: <HomeOutlined style={{fontSize: 18}}/>, label: "Inicio", key: "/dashboard", style: {marginBottom: '15px'} },
-          { icon: <ProductOutlined style={{fontSize: 18}}/>, label: "Productos", key: "/dashboard/products", style: {marginBottom: '15px'} },
-          { icon: <EuroCircleOutlined style={{fontSize: 18}}/>, label: "Ventas", key: "/dashboard/invoices", style: {marginBottom: '15px'} },
-          { icon: <UserOutlined style={{fontSize: 18}}/>, label: "Usuarios", key: "/dashboard/users", style: {marginBottom: '15px'} },
+          { icon: <HomeOutlined style={{ fontSize: 18 }} />, label: "Inicio", key: "/dashboard", style: { marginBottom: '15px' } },
+          { icon: <ProductOutlined style={{ fontSize: 18 }} />, label: "Productos", key: "/dashboard/products", style: { marginBottom: '15px' } },
+          { icon: <EuroCircleOutlined style={{ fontSize: 18 }} />, label: "Ventas", key: "/dashboard/invoices", style: { marginBottom: '15px' } },
+          { icon: <UserOutlined style={{ fontSize: 18 }} />, label: "Usuarios", key: "/dashboard/users", style: { marginBottom: '15px' } },
         ]}
         style={{
           width: 240,
