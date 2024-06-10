@@ -1,10 +1,22 @@
 import { Image, Popover, Typography } from "antd"
 import logo from "../assets/bambu-logo.png"
+import { useNavigate } from "react-router-dom"
+import { logoutUser } from "../API";
 const Header = () => {
+  const navigate = useNavigate();
+  const handleClick = async () => {
+    const response = await logoutUser();
+
+    if (response.ok) {
+      navigate('/');
+    } else {
+      alert("Error cerrando sesión");
+    }
+  }
+
   const content = (
     <div className="flex flex-col gap-2">
-      <a href="/profile" className="text-gray-600 hover:text-gray-900">Perfil</a>
-      <a href="/logout" className="text-gray-600 hover:text-gray-900">Cerrar Sesión</a>
+      <a href="/" onClick={handleClick} className="text-gray-600 hover:text-gray-900">Cerrar Sesión</a>
     </div>
   )
 
