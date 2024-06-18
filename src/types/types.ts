@@ -49,9 +49,17 @@ export interface iUser {
 export interface iInvoice {
   _id: string;
   order_id: string;
-  date: Date;
+  date: string;
   user: iUser;
   products: iProduct[];
   total: number;
+}
+export interface iOrder {
+  _id: string;
+  order_id: string;
+  date: Date;
+  user: iUser;
+  products: iProduct[];
+  amount: number;
 }
 

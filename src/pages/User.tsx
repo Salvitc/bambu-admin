@@ -6,7 +6,7 @@ import { deleteUser, getUsers, postUser, updateUser } from "../API"
 const User = () => {
   const [users, setUsers] = React.useState<iUser[]>([])
   const [loadingUsers, setLoadingUsers] = React.useState<boolean>(true)
-  const [modal, contextHolder] = Modal.useModal() 
+  const [modal, contextHolder] = Modal.useModal()
   const [refresh, setRefresh] = React.useState(false)
 
   const columns: TableProps<iUser>['columns'] = [
@@ -40,12 +40,12 @@ const User = () => {
       key: 'actions',
       render: (_: any, user: iUser) => (
         <Space size="middle">
-          <Button onClick={() => handleEdit(user)}className="text-blue-700 bg-blue-50 rounded-lg border border-blue-200">Editar</Button>
+          <Button onClick={() => handleEdit(user)} className="text-blue-700 bg-blue-50 rounded-lg border border-blue-200">Editar</Button>
           <Button onClick={() => handleDelete(user._id!)} className="text-red-700 bg-red-50 rounded-lg border border-red-200">Eliminar</Button>
         </Space>
       ),
     },
-   ]
+  ]
 
   const handleEdit = (user: iUser) => {
     modal.confirm({
@@ -59,10 +59,10 @@ const User = () => {
       content: (
         <Form
           id="update_user"
-          labelCol={{span: 6}}
-          wrapperCol={{span: 16}}
+          labelCol={{ span: 6 }}
+          wrapperCol={{ span: 16 }}
           layout="horizontal"
-          style={{maxWidth: 1200}}
+          style={{ maxWidth: 1200 }}
           onFinish={(values: UserFormProps) => {
             updateUser(values, user._id!)
               .then((response: any) => {
@@ -102,27 +102,27 @@ const User = () => {
             address: user.address
           }}
         >
-          <Form.Item label="Nombre" name="name" rules={[{required: true, message: 'Introduce un nombre.'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Nombre" name="name" rules={[{ required: true, message: 'Introduce un nombre.' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Apellidos" name="lastname" rules={[{required: true, message: 'Añade los apellidos'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Apellidos" name="lastname" rules={[{ required: true, message: 'Añade los apellidos' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Usuario" name="username" rules={[{required: true, message: 'Añade el nombre de usuario'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Usuario" name="username" rules={[{ required: true, message: 'Añade el nombre de usuario' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Email" name="email" rules={[{required: true, message: 'Añade el email'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Añade el email' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Dirección" name="address" rules={[{required: true, message: 'Añade la dirección'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Dirección" name="address" rules={[{ required: true, message: 'Añade la dirección' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item name="role"/>
+          <Form.Item name="role" />
         </Form>
       )
     })
   }
-  
+
   const handleDelete = (id: string) => {
     modal.confirm({
       title: '¿Estás seguro de eliminar este usuario?',
@@ -157,10 +157,10 @@ const User = () => {
               )
             })
           })
-        }
+      }
     })
   }
-  
+
   const handleCreateAdmin = () => {
     modal.confirm({
       title: 'Crear administrador',
@@ -173,12 +173,11 @@ const User = () => {
       content: (
         <Form
           id="create_admin"
-          labelCol={{span: 8}}
-          wrapperCol={{span: 20}}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 20 }}
           layout="horizontal"
-          style={{maxWidth: 1200}}
+          style={{ maxWidth: 1200 }}
           onFinish={(values: UserFormProps) => {
-            console.log(values)
             postUser(values)
               .then((response: any) => {
                 if (response.ok) {
@@ -209,25 +208,25 @@ const User = () => {
               })
           }}
         >
-          <Form.Item label="Nombre" name="name" rules={[{required: true, message: 'Introduce un nombre.'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Nombre" name="name" rules={[{ required: true, message: 'Introduce un nombre.' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Apellidos" name="lastname" rules={[{required: true, message: 'Añade los apellidos'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Apellidos" name="lastname" rules={[{ required: true, message: 'Añade los apellidos' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Usuario" name="username" rules={[{required: true, message: 'Añade el nombre de usuario'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Usuario" name="username" rules={[{ required: true, message: 'Añade el nombre de usuario' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Email" name="email" rules={[{required: true, message: 'Añade el email'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Email" name="email" rules={[{ required: true, message: 'Añade el email' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Dirección" name="address" rules={[{required: true, message: 'Añade la dirección'}]}>
-            <Input className="rounded-lg"/>
+          <Form.Item label="Dirección" name="address" rules={[{ required: true, message: 'Añade la dirección' }]}>
+            <Input className="rounded-lg" />
           </Form.Item>
-          <Form.Item label="Contraseña" name="password" rules={[{required: true, message: 'Añade una contraseña'}]}>
-            <Input className="rounded-lg" type="password"/>
+          <Form.Item label="Contraseña" name="password" rules={[{ required: true, message: 'Añade una contraseña' }]}>
+            <Input className="rounded-lg" type="password" />
           </Form.Item>
-          <Form.Item name="role"/>
+          <Form.Item name="role" />
         </Form>
       )
     })
@@ -238,7 +237,6 @@ const User = () => {
     getUsers().then((data) => {
       setUsers(data)
       setLoadingUsers(false)
-      console.log(data)
     })
   }, [refresh])
 
@@ -246,7 +244,7 @@ const User = () => {
     <Space direction="vertical" className="px-12 py-6 w-full">
       <Space direction="vertical" className="mb-14">
         <Typography.Title level={3}>Clientes</Typography.Title>
-        <Table 
+        <Table
           columns={columns}
           dataSource={users.filter(user => user.role.code === 'CUSTOMER')}
           loading={loadingUsers}
@@ -259,13 +257,13 @@ const User = () => {
         </Space>
         <Table
           columns={columns}
-          dataSource={users.filter(user => user.role.code=== 'ADMIN')}
-          loading={loadingUsers} 
+          dataSource={users.filter(user => user.role.code === 'ADMIN')}
+          loading={loadingUsers}
         />
       </Space>
       {contextHolder}
     </Space>
-   )
+  )
 }
 
 export default User 

@@ -26,7 +26,7 @@ const Invoices = () => {
       render: (_: any, invoice: iInvoice) => {
         return (
           <Space>
-            <Typography.Text>{new Date(invoice.date).toLocaleDateString()}</Typography.Text>
+            <Typography.Text>{new Date(invoice.date).toLocaleString()}</Typography.Text>
           </Space>
         )
       }
@@ -149,7 +149,6 @@ const Invoices = () => {
             onFinish={(values: DatesProps) => {
               getOrdersByDateRange(values.dates.map(date => date.toISOString()))
                 .then((data: iInvoice[]) => {
-                  console.log(data)
                 })
             }}
           >

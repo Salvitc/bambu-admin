@@ -2,8 +2,35 @@ import { EuroCircleOutlined, ProductOutlined, ShoppingCartOutlined, UserOutlined
 import { Card, Space, Statistic, Typography } from "antd"
 import SellsChart from "../components/SellsChart"
 import ProductsChart from "../components/ProductsChart"
+import { getOrders, getProducts, getUsers } from "../API"
+import { useEffect, useState } from "react"
 
 const Home = () => {
+  const [productsSize, setProductsSize] = useState<number>(0);
+  const [ordersSize, setOrdersSize] = useState<number>(0);
+  const [revenue, setRevenue] = useState<String>('');
+  const [clients, setClients] = useState<number>(0);
+
+  useEffect(() => {
+    getProducts()
+      .then((products) => {
+        setProductsSize(products.length)
+      })
+    getOrders()
+      .then((orders) => {
+        setOrdersSize(orders.length);
+        let revenue = orders.reduce((sum, order) => sum + order.amount, 0).toFixed(2);
+
+        setRevenue(revenue + " €");
+      })
+    getUsers()
+      .then((users) => {
+        const clients = users.filter((user) => user.role.code === "CUSTOMER")
+
+        setClients(clients.length)
+      })
+  }, [])
+
   return (
     <Space className="flex px-12 py-6 w-full" size={24} direction="vertical">
       <Typography.Title level={3}>Dashboard</Typography.Title>
@@ -19,7 +46,7 @@ const Home = () => {
                 padding: 12
               }}
             />
-            <Statistic className="flex flex-col items-center" title="Productos" value={Math.floor(Math.random() * 100)} />
+            <Statistic className="flex flex-col items-center" title="Productos" value={productsSize} />
           </Space>
         </Card>
         <Card>
@@ -33,7 +60,7 @@ const Home = () => {
                 padding: 12
               }}
             />
-            <Statistic className="flex flex-col items-center" title="Ventas" value={Math.floor(Math.random() * 100)} />
+            <Statistic className="flex flex-col items-center" title="Ventas" value={ordersSize} />
           </Space>
         </Card>
         <Card>
@@ -46,7 +73,7 @@ const Home = () => {
               padding: 12
             }}
             />
-            <Statistic className="flex flex-col items-center" title="Clientes" value={Math.floor(Math.random() * 100)} />
+            <Statistic className="flex flex-col items-center" title="Clientes" value={clients} />
           </Space>
         </Card>
         <Card>
@@ -59,7 +86,7 @@ const Home = () => {
               padding: 12
             }}
             />
-            <Statistic className="flex flex-col items-center" title="Beneficios" value={Math.floor(Math.random() * 100)} />
+            <Statistic className="flex flex-col items-center" title="Beneficios" value={revenue} />
           </Space>
 
         </Card>

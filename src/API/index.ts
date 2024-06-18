@@ -1,7 +1,7 @@
-import { ProductFormProps, UserFormProps, iUser } from "../types/types"
+import { ProductFormProps, UserFormProps, iProduct, iUser, iOrder } from "../types/types"
 
 //PEDIDOS
-export const getOrders = async () => {
+export const getOrders = async (): Promise<iOrder[]> => {
   const response = await fetch("/api/order")
   return await response.json()
 }
@@ -12,7 +12,7 @@ export const getOrdersByDateRange = async (dates: string[]) => {
 }
 
 // USUARIOS
-export const getUsers = async () => {
+export const getUsers = async (): Promise<iUser[]> => {
   const response = await fetch("/api/user")
   return await response.json()
 }
@@ -77,7 +77,7 @@ export const logoutUser = async () => {
 }
 
 // PRODUCTOS
-export const getProducts = async () => {
+export const getProducts = async (): Promise<iProduct[]> => {
   const response = await fetch("/api/product")
   return await response.json()
 }
