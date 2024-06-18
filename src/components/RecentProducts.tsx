@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import { getProducts } from "../API"
 import { Table, Tag } from "antd"
+import { iProduct } from "../types/types"
 const RecentProducts = () => {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<iProduct[]>([])
   const [loadingProducts, setLoadingProducts] = useState(true)
   useEffect(() => {
     setLoadingProducts(true)

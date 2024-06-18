@@ -3,7 +3,7 @@ import { getOrders } from "../API"
 import { Space, Table, Tag, Typography } from "antd"
 import { iInvoice } from "../types/types"
 const RecentOrders = () => {
-  const [orders, setOrders] = useState([])
+  const [orders, setOrders] = useState<iInvoice[]>([])
   const [loadingOrders, setLoadingOrders] = useState(true)
   useEffect(() => {
     setLoadingOrders(true)

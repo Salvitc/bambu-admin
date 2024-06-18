@@ -53,6 +53,7 @@ export interface iInvoice {
   user: iUser;
   products: iProduct[];
   total: number;
+  amount: number;
 }
 export interface iOrder {
   _id: string;

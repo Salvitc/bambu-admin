@@ -148,7 +148,7 @@ const Invoices = () => {
             id="dates-form"
             onFinish={(values: DatesProps) => {
               getOrdersByDateRange(values.dates.map(date => date.toISOString()))
-                .then((data: iInvoice[]) => {
+                .then((_: iInvoice[]) => {
                 })
             }}
           >

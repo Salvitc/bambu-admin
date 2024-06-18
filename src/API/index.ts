@@ -1,7 +1,7 @@
-import { ProductFormProps, UserFormProps, iProduct, iUser, iOrder } from "../types/types"
+import { ProductFormProps, UserFormProps, iProduct, iUser, iInvoice } from "../types/types"
 
 //PEDIDOS
-export const getOrders = async (): Promise<iOrder[]> => {
+export const getOrders = async (): Promise<iInvoice[]> => {
   const response = await fetch("/api/order")
   return await response.json()
 }

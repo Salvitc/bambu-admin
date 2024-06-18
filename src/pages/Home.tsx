@@ -4,6 +4,7 @@ import SellsChart from "../components/SellsChart"
 import ProductsChart from "../components/ProductsChart"
 import { getOrders, getProducts, getUsers } from "../API"
 import { useEffect, useState } from "react"
+import { valueType } from "antd/es/statistic/utils"
 
 const Home = () => {
   const [productsSize, setProductsSize] = useState<number>(0);
@@ -86,7 +87,7 @@ const Home = () => {
               padding: 12
             }}
             />
-            <Statistic className="flex flex-col items-center" title="Beneficios" value={revenue} />
+            <Statistic className="flex flex-col items-center" title="Beneficios" value={revenue as valueType} />
           </Space>
 
         </Card>

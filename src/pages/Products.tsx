@@ -9,7 +9,7 @@ import { UploadProps } from 'antd';
 const Products = () => {
   const [fileList, setFileList] = useState<string[]>([])
 
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState<iProduct[]>([])
   const [loadingProducts, setLoadingProducts] = useState(true)
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
