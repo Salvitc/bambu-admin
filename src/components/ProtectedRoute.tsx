@@ -1,32 +1,40 @@
-import { PropsWithChildren } from "react"
-import { LoginProps } from "../types/types"
+import { PropsWithChildren, useEffect, useState } from "react";
+import { LoginProps } from "../types/types";
 import { Navigate } from "react-router-dom";
 
 export const ProtectedRoute = (props: PropsWithChildren<LoginProps>) => {
-  const isAuthorized = async (): Promise<boolean> => {
-    const role = await fetch('/api/user/role', {
-      method: 'GET',
-    })
-    const roleString = await role.json();
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
 
-    if (roleString !== props.roleRequired) {
-      return false
-    }
+  useEffect(() => {
+    const checkAuthorization = async () => {
+      try {
+        const response = await fetch('/api/user/role', {
+          method: 'GET',
+        });
+        const roleString = await response.json();
 
-    return true
+        if (roleString !== props.roleRequired) {
+          setIsAuthorized(false);
+        } else {
+          setIsAuthorized(true);
+        }
+      } catch (error) {
+        console.error('Failed to fetch user role:', error);
+        setIsAuthorized(false);
+      }
+    };
+
+    checkAuthorization();
+  }, [props.roleRequired]);
+
+  if (isAuthorized === null) {
+    // You can return a loading indicator here while waiting for the authorization check
+    return <div>Loading...</div>;
   }
 
-  isAuthorized()
-    .then((result) => {
-      if (!result) {
-        return <Navigate to="/error" replace />
-      }
+  if (!isAuthorized) {
+    return <Navigate to="/error" replace />;
+  }
 
-      return props.children
-    })
-    .catch(() => {
-      return <Navigate to="/error" replace />
-    })
-
-  return props.children
-}
+  return <>{props.children}</>;
+};

@@ -16,7 +16,7 @@ const Header = () => {
 
   const content = (
     <div className="flex flex-col gap-2">
-      <a href="/" onClick={handleClick} className="text-gray-600 hover:text-gray-900">Cerrar Sesión</a>
+      <a onClick={handleClick} className="text-gray-600 hover:text-gray-900">Cerrar Sesión</a>
     </div>
   )
 
