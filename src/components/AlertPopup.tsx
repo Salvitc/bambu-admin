@@ -1,10 +1,12 @@
 interface AlertProps {
   text: string
+  setProp: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AlertPopup = ({ text }: AlertProps) => {
+const AlertPopup = ({ text, setProp }: AlertProps) => {
+
   return (
-    <div
+    <div onClick={() => setProp(false)}
       className="font-regular relative block w-full rounded-lg bg-pink-500 p-4 text-base leading-5 text-white opacity-100"
       data-dismissible="alert">
       <div className="mr-12">{text}</div>

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [unauthorized, setUnauthorized] = useState(false)
+  const [incorrectPassword, setIncorrectPassword] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -32,12 +33,21 @@ function LoginPage() {
           <Spin size="large" /> :
           <LoginForm
             setUnauthorized={setUnauthorized}
+            setIncorrectPassword={setIncorrectPassword}
           />
         }
         {
           unauthorized &&
           <AlertPopup
+            setProp={setUnauthorized}
             text="No tienes permisos para entrar en este portal"
+          />
+        }
+        {
+          incorrectPassword &&
+          <AlertPopup
+            setProp={setIncorrectPassword}
+            text="Contraseña Incorrecta"
           />
         }
       </div>
